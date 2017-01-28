@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private String LOG_TAG;
     private BluetoothAdapter mBluetoothAdapter;
     private int REQUEST_ENABLE_BT = 99;
+    private int x;
 
 
     @Override
