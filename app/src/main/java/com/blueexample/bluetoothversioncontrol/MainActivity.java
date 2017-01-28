@@ -1,6 +1,7 @@
 package com.blueexample.bluetoothversioncontrol;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,13 +27,23 @@ public class MainActivity extends AppCompatActivity {
         LOG_TAG = getResources().getString(R.string.app_name);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         Button startBluetooth = (Button) findViewById(R.id.startBluetooth);
+        Button arrayGetter = (Button)findViewById(R.id.getArray) ;
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 enableBluetoothOnDevice();
             }
         };
+
+        View.OnClickListener listener2 = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                getArrayOfAlreadyPairedBluetoothDevices();
+            }
+        };
+
         startBluetooth.setOnClickListener(listener);
+        arrayGetter.setOnClickListener(listener2);
 
 
     }
@@ -46,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         if (!mBluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-            
+
         }
     }
 
@@ -65,5 +79,34 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(LOG_TAG, "User allowed bluetooth access!");
         }
 
+    }
+
+    private ArrayList getArrayOfAlreadyPairedBluetoothDevices()
+    {
+        ArrayList <BluetoothObject> arrayOfAlreadyPairedBTDevices = null;
+
+        // Query paired devices
+        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+        // If there are any paired devices
+        if (pairedDevices.size() > 0)
+        {
+            arrayOfAlreadyPairedBTDevices = new ArrayList<BluetoothObject>();
+
+            // Loop through paired devices
+            for (BluetoothDevice device : pairedDevices)
+            {
+                // Create the device object and add it to the arrayList of devices
+                BluetoothObject bluetoothObject = new BluetoothObject();
+                bluetoothObject.setBluetooth_name(device.getName());
+                bluetoothObject.setBluetooth_address(device.getAddress());
+                bluetoothObject.setBluetooth_state(device.getBondState());
+                bluetoothObject.setBluetooth_type(device.getType());    // requires API 18 or higher
+                bluetoothObject.setBluetooth_uuids(device.getUuids());
+
+                arrayOfAlreadyPairedBTDevices.add(bluetoothObject);
+            }
+        }
+
+        return arrayOfAlreadyPairedBTDevices;
     }
 }
