@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         // If there are any paired devices
         if (pairedDevices.size() > 0)
         {
-            arrayOfAlreadyPairedBTDevices = new ArrayList<BluetoothObject>();
+            arrayOfAlreadyPairedBTDevices = new ArrayList<>();
 
             // Loop through paired devices
             for (BluetoothDevice device : pairedDevices)
