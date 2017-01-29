@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textview_bt_scan_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="BT NAME"
+        android:textColor="#000000"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/textview_bt_scan_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="BT ADDRESS"
+        android:textColor="#000000"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/textview_bt_scan_name"
+        app:layout_constraintTop_toBottomOf="@+id/textview_bt_scan_name"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/textview_bt_scan_name"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/textview_bt_scan_state"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="BT STATE"
+        android:textColor="#000000"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/textview_bt_scan_address"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textview_bt_scan_address"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/textview_bt_scan_address" />
+
+    <TextView
+        android:id="@+id/textview_bt_scan_type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="BT TYPE"
+        android:textColor="#000000"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/textview_bt_scan_state"
+        app:layout_constraintTop_toBottomOf="@+id/textview_bt_scan_state"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/textview_bt_scan_state"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/textview_bt_scan_uuid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="BT UUID"
+        android:textColor="#000000"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/textview_bt_scan_type"
+        android:layout_marginTop="1dp"
+        app:layout_constraintTop_toBottomOf="@+id/textview_bt_scan_type"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/textview_bt_scan_type" />
+
+    <TextView
+        android:id="@+id/textview_bt_scan_signal_strength"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="BT SIGNAL STRENGTH"
+        android:textColor="#000000"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/textview_bt_scan_uuid"
+        app:layout_constraintTop_toBottomOf="@+id/textview_bt_scan_uuid"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/textview_bt_scan_uuid"
+        android:layout_marginTop="8dp" />
+
+</android.support.constraint.ConstraintLayout>

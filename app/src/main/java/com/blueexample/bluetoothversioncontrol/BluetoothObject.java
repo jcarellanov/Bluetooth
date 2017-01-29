@@ -67,22 +67,19 @@ public class BluetoothObject implements Parcelable {
     }
 
     // Parcelable stuff
-    public BluetoothObject()
-    {}  //empty constructor
+    public BluetoothObject() {
+    }  //empty constructor
 
-    public BluetoothObject(Parcel in)
-    {
+    public BluetoothObject(Parcel in) {
         super();
         readFromParcel(in);
     }
 
-    public void readFromParcel(Parcel in)
-    {
+    public void readFromParcel(Parcel in) {
         bluetooth_name = in.readString();
     }
 
-    public static final Parcelable.Creator<BluetoothObject> CREATOR = new Parcelable.Creator<BluetoothObject>()
-    {
+    public static final Parcelable.Creator<BluetoothObject> CREATOR = new Parcelable.Creator<BluetoothObject>() {
         public BluetoothObject createFromParcel(Parcel in) {
             return new BluetoothObject(in);
         }

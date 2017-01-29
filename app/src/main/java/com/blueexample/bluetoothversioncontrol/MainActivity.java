@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
         LOG_TAG = getResources().getString(R.string.app_name);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         Button startBluetooth = (Button) findViewById(R.id.startBluetooth);
-        Button arrayGetter = (Button)findViewById(R.id.getArray) ;
+        Button alreadyPaired = (Button) findViewById(R.id.getArray);
+        Button findBluetooth = (Button) findViewById(R.id.scanDevices);
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,15 +37,28 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        View.OnClickListener listener2 = new View.OnClickListener(){
+        View.OnClickListener pairedDevices = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getArrayOfAlreadyPairedBluetoothDevices();
+                if (getArrayOfAlreadyPairedBluetoothDevices() != null) {
+                    Intent intent = new Intent(MainActivity.this, AlreadyPairedList.class);
+                    intent.putParcelableArrayListExtra("arrayOfPairedDevices", getArrayOfAlreadyPairedBluetoothDevices());
+                    startActivity(intent);
+                }
+            }
+        };
+
+        View.OnClickListener findDevices = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mBluetoothAdapter != null)
+                    scanForBluetoothDevices();
             }
         };
 
         startBluetooth.setOnClickListener(listener);
-        arrayGetter.setOnClickListener(listener2);
+        alreadyPaired.setOnClickListener(pairedDevices);
+        findBluetooth.setOnClickListener(findDevices);
 
 
     }
@@ -82,20 +96,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private ArrayList getArrayOfAlreadyPairedBluetoothDevices()
-    {
-        ArrayList <BluetoothObject> arrayOfAlreadyPairedBTDevices = null;
+    private ArrayList getArrayOfAlreadyPairedBluetoothDevices() {
+        ArrayList<BluetoothObject> arrayOfAlreadyPairedBTDevices = null;
 
         // Query paired devices
         Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
         // If there are any paired devices
-        if (pairedDevices.size() > 0)
-        {
+        if (pairedDevices.size() > 0) {
             arrayOfAlreadyPairedBTDevices = new ArrayList<>();
 
             // Loop through paired devices
-            for (BluetoothDevice device : pairedDevices)
-            {
+            for (BluetoothDevice device : pairedDevices) {
                 // Create the device object and add it to the arrayList of devices
                 BluetoothObject bluetoothObject = new BluetoothObject();
                 bluetoothObject.setBluetooth_name(device.getName());
@@ -109,5 +120,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return arrayOfAlreadyPairedBTDevices;
+    }
+
+    private void scanForBluetoothDevices() {
+        // Start this on a new activity without passing any data to it
+        Intent intent = new Intent(this, FoundBTDevices.class);
+        startActivity(intent);
     }
 }
