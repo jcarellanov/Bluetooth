@@ -1,9 +1,11 @@
 package com.blueexample.bluetoothversioncontrol;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,12 +21,27 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothAdapter mBluetoothAdapter;
     private int REQUEST_ENABLE_BT = 99;
     private int x;
+    public int MY_PERMISSIONS_ACCESS_FINE = 1;
+
+    public static final String[] runtimePermissions = {
+            Manifest.permission.BLUETOOTH_ADMIN,
+            Manifest.permission.BLUETOOTH
+            , Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION
+
+    };
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                MY_PERMISSIONS_ACCESS_FINE);
+
+
         LOG_TAG = getResources().getString(R.string.app_name);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         Button startBluetooth = (Button) findViewById(R.id.startBluetooth);
